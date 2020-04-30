@@ -1,0 +1,76 @@
+#! /usr/bin/vvp
+:ivl_version "10.1 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x55aa250f0190 .scope module, "counter_tb" "counter_tb" 2 3;
+ .timescale -9 -12;
+v0x55aa251108b0_0 .var "clk", 0 0;
+v0x55aa25110970_0 .var "enable", 0 0;
+v0x55aa25110a40_0 .net "out", 3 0, v0x55aa25110650_0;  1 drivers
+v0x55aa25110b40_0 .var "reset", 0 0;
+S_0x55aa250f0310 .scope module, "uut" "Counter" 2 9, 3 1 0, S_0x55aa250f0190;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "clk"
+    .port_info 1 /INPUT 1 "enable"
+    .port_info 2 /INPUT 1 "reset"
+    .port_info 3 /OUTPUT 4 "out"
+v0x55aa250f0550_0 .net "clk", 0 0, v0x55aa251108b0_0;  1 drivers
+v0x55aa25110590_0 .net "enable", 0 0, v0x55aa25110970_0;  1 drivers
+v0x55aa25110650_0 .var "out", 3 0;
+v0x55aa25110740_0 .net "reset", 0 0, v0x55aa25110b40_0;  1 drivers
+E_0x55aa250ecdc0 .event posedge, v0x55aa250f0550_0;
+    .scope S_0x55aa250f0310;
+T_0 ;
+    %wait E_0x55aa250ecdc0;
+    %load/vec4 v0x55aa25110740_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0x55aa25110650_0, 0, 4;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x55aa25110590_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.2, 8;
+    %load/vec4 v0x55aa25110650_0;
+    %addi 1, 0, 4;
+    %store/vec4 v0x55aa25110650_0, 0, 4;
+T_0.2 ;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0x55aa250f0190;
+T_1 ;
+    %vpi_call 2 19 "$dumpfile", "mux_out.vcd" {0 0 0};
+    %vpi_call 2 20 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x55aa250f0190 {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55aa251108b0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55aa25110970_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55aa25110b40_0, 0, 1;
+    %delay 30000, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55aa25110b40_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55aa25110970_0, 0, 1;
+    %end;
+    .thread T_1;
+    .scope S_0x55aa250f0190;
+T_2 ;
+    %delay 3000, 0;
+    %load/vec4 v0x55aa251108b0_0;
+    %inv;
+    %store/vec4 v0x55aa251108b0_0, 0, 1;
+    %jmp T_2;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "tb_counter_module.v";
+    "counter_module.v";
