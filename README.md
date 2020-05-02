@@ -1,7 +1,7 @@
 # Verilog_Programming
-Implementations of a few simple circuit elements in Verilog
+Implementations of a few simple circuit elements in Verilog like Multiplexers, Counters, an FSM and an ALU
 
-The circuit elements are :
-Multiplexers, Counters, an FSM and an ALU
+
+
  
  
